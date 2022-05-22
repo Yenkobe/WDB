@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 
 app.get('/cats', (req, res) => {
     const cats = [
-        'Blue', 'Rocket', 'Monty', 'Stephanie', 'Winston'
+        'Blue', 'Rocket', 'Yenduy', 'Stephanie', 'Winston'
     ]
     res.render('cats', { cats })
 })
