@@ -14,17 +14,21 @@ mongoose.connect('mongodb://localhost:27017/moviesApp')
 const productSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        // for the name lets use 20 characters. 
+        maxlength: 20
     },
     price: {
         type: Number,
         required: true
-    }
+    },
+    categories: [String]
+
 });
 
 const Product = mongoose.model('Product', productSchema);
 
-const game = new Product({ name: 'NBA2K22', price: 79.99 })
+const game = new Product({ name: 'NBA2K22', price: 79.99, categories: ['Sport', 'Shooters', 'Multiplayer online battle', 'Sanbox'] })
 game.save()
     .then(data => {
         console.log("IT WORKED!")
