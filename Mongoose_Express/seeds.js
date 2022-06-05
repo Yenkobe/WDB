@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 //export from the product.js
 const Product = require('./models/product');
 
-mongoose.connect('mongodb://localhost:27017/farmStand')
+mongoose.connect('mongodb://localhost:27017/farmStandTest')
     .then(() => {
         console.log("MONGO CONNECTION OPEN!!")
     })
