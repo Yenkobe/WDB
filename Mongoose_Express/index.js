@@ -18,12 +18,26 @@ mongoose.connect('mongodb://localhost:27017/farmStandTest')
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+// esto se necesita para conectar el button, donde se enviara la nueva info.
+app.use(express.urlencoded({ extended: true }))
 
 // test if is working!! 
 app.get('/products', async (req, res) => {
     const products = await Product.find({})
     res.render('products/index', { products });
 
+})
+//creating products
+app.get('/products/new', (req, res) => {
+    res.render('products/new')
+})
+//where we want the product to be submitted.
+
+app.post('/products', async (req, res) => {
+    const newProduct = new Product(req.body);
+    await newProduct.save();
+    //important redirect
+    res.redirect(`/products/${newProduct._id}`)
 })
 //product detail
 app.get('/products/:id', async (req, res) => {
