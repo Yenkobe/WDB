@@ -19,4 +19,17 @@ personSchema.virtual('fullName').get(function () {
     return `${this.first} ${this.last}`
 })
 
+//Mongoose has 4 types of middleware: document middleware, model middleware, aggregate middleware, and query middleware. 
+//Document middleware is supported for the following document functions.In document middleware functions, this refers to the document.
+personSchema.pre('save', async function () {
+    //this will run before save ... just a silly example.
+    this.first = 'Steven';
+    this.last = 'Pan';
+    console.log("ABOUT TO SAVE!!")
+
+})
+personSchema.post('save', async function () {
+    console.log("JUST SAVED!!")
+})
+
 const Person = mongoose.model('Person', personSchema);
