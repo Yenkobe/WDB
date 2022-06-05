@@ -25,6 +25,13 @@ app.get('/products', async (req, res) => {
     res.render('products/index', { products });
 
 })
+//product detail
+app.get('/products/:id', async (req, res) => {
+    const { id } = req.params;
+    const product = await Product.findById(id)
+    res.render('products/show', { product });
+
+})
 // When you send a database query like .find() it needs some time to communicate to the database and get the data back,
 // and when you add the await keyword the code will basically 'pause' and wait to get the data back from the database.
 
