@@ -1,5 +1,9 @@
 const express = require('express');
 const app = express();
+const morgan = require('morgan');
+
+// https://www.npmjs.com/package/morgan
+app.use(morgan('tiny'))
 
 app.get('/', (req, res) => {
     res.send('HOME PAGE')
