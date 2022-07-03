@@ -47,6 +47,7 @@ const makeFarm = async () => {
     console.log(farm);
 }
 
-makeFarm();
-
+farm.findOne({ name: 'Steven Best Farms' })
+    .populate('products')
+    .then(farm => console.log(farm))
 
