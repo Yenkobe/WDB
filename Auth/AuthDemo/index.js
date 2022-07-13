@@ -20,6 +20,15 @@ mongoose.connect('mongodb://localhost:27017/authDemo')
 app.use(express.urlencoded({ extended: true }));
 app.use(session({ secret: 'notagoodsecret' }));
 
+//Require Login Middleware
+
+const requireLogin = (req, res, next) => {
+    if (!req.session.user_id) {
+        return res.redirect('/login')
+    }
+    next();
+}
+
 
 // setup ejs
 app.set('view engine', 'ejs');
@@ -73,10 +82,7 @@ app.post('/logout', (req, res) => {
 })
 
 
-app.get('/secret', (req, res) => {
-    if (!req.session.user_id) {
-        return res.redirect('/login')
-    }
+app.get('/secret', requireLogin, (req, res) => {
     res.render('secret')
 })
 
